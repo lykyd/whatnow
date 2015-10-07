@@ -70,7 +70,7 @@
 - ping www.domain.com => domain accessible
 - telnet www.domain.com 22 => check access to ssh port
 - telnet www.domain.com 80 => check access to web server port
-- 
+
 **Rsync (connexion via ssh aux files)**
 - rsync -vr -e “ssh -p numport” user@url-domain:dist/sources dist/local
 - mysqldump dbname
