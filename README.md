@@ -184,3 +184,36 @@ root: ???
 		return valueFactor * controllerFactor;
 	};
 }</pre>
+
+### The Provider Recipe
+--- root.js<br>
+<pre>angular.module("root", ["services"])
+	.constant("messageText", "Hello world fringue !")
+	.config(["messageProvider", "messageText", function (messageProvider, messageText) {
+		messageProvider.setText(messageText);
+	}])
+	.controller("index", ["$scope", "message",
+	function ($scope, message) {
+		$scope.message = message.text;
+	}]);</pre>
+		
+--- services.js<br>
+<pre>angular.module("services", [])
+	.provider("message", [function () {
+		var text = null;
+
+		this.setText = function (textString) {
+			text = textString;
+		};
+
+		this.$get = [function () {
+			return new Message(text);
+		}];
+	}]);</pre>
+	
+--- message.js<br>
+<pre>function Message(text) {
+	this.text = text;
+}</pre>
+
+
